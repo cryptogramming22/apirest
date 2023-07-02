@@ -1,4 +1,4 @@
-package domain;
+package com.cryptogramming.apirest.domain;
 
 
 import com.mongodb.lang.NonNull;
@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 @Getter
 @Setter

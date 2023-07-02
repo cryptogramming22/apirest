@@ -1,40 +1,57 @@
 package com.cryptogramming.apirest.service;
 
+import com.cryptogramming.apirest.dto.ProductDTO;
 import com.cryptogramming.apirest.repository.ProductRepository;
-import domain.Product;
-import domain.model.CrudService;
+import com.cryptogramming.apirest.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
-public  class ProductService   implements CrudService<Product> {
+public  class ProductService  {
 
     @Autowired
     ProductRepository repository;
 
-    @Override
-    public void create(Product product) {
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
+
+
+    public void createProduct(ProductDTO productDTO) {
+        Product product = new Product(
+                productDTO.getId(),
+                productDTO.getImagePath(),
+                productDTO.getTitle(),
+                productDTO.getDescription()
+        );
+
         repository.save(product);
     }
 
-    @Override
-    public void update(String id, Product product) {
+    public void updateProduct(int productId,ProductDTO productDTO) {
+        Product product = repository.findById(productId).orElse(null);
+
+        if (product!=null){
+            product.setTitle(productDTO.getTitle());
+            product.setDescription(productDTO.getDescription());
+            repository.save(product);
+        }
     }
 
-    @Override
-    public void delete(String id) {
+    public void deleteProduct(int productId) {
+        Product product = repository.findById(productId).orElse(null);
+
+        if (product!=null){
+            repository.delete(product);
+        }
     }
 
-    @Override
-    public Collection<Product> getItem() {
-        return null;
-    }
 
-    @Override
-    public List<Product> getAllItems() {
-        return repository.findAll();
-    }
+
+
+
+
+
 }

@@ -1,15 +1,13 @@
 package com.cryptogramming.apirest.controller;
 
 
+import com.cryptogramming.apirest.dto.ProductDTO;
 import com.cryptogramming.apirest.service.ProductService;
-import domain.Product;
+import com.cryptogramming.apirest.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,18 +15,34 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    protected ProductService productService;
+    private ProductService productService;
     @GetMapping(value="/products",produces = "application/json")
     public List<Product> getProducts() {
-        return  productService.getAllItems();
+        return  productService.getAllProducts();
     }
 
-    @PostMapping(value = "/products")
-    public ResponseEntity  saveProduct(@RequestBody Product product){
+    @PostMapping(value = "/product")
+    public ResponseEntity  saveProduct(@RequestBody ProductDTO productDTO){
 
+        productService.createProduct(productDTO);
+        return new ResponseEntity(HttpStatus.CREATED);
 
-        productService.create(product);
+    }
+
+    @PutMapping(value = "/{productId}")
+    public ResponseEntity  updateProduct(@PathVariable int productId,@RequestBody ProductDTO productDTO){
+
+        productService.updateProduct(productId,productDTO);
         return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+
+    @DeleteMapping(value = "/{productId}")
+    public ResponseEntity  deleteProduct(@PathVariable int productId){
+
+        productService.deleteProduct(productId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
 
     }
 }
