@@ -17,11 +17,15 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @GetMapping(value="/products",produces = "application/json")
-    public List<Product> getProducts() {
-        return  productService.getAllProducts();
+    public ResponseEntity getProducts() {
+
+        List<ProductDTO> response = productService.getAllProducts();
+
+        return new ResponseEntity(response,HttpStatus.CREATED);
+
     }
 
-    @PostMapping(value = "/product")
+    @PostMapping(value = "/products")
     public ResponseEntity  saveProduct(@RequestBody ProductDTO productDTO){
 
         productService.createProduct(productDTO);
@@ -32,8 +36,8 @@ public class ProductController {
     @PutMapping(value = "/{productId}")
     public ResponseEntity  updateProduct(@PathVariable int productId,@RequestBody ProductDTO productDTO){
 
-        productService.updateProduct(productId,productDTO);
-        return new ResponseEntity(HttpStatus.OK);
+        ProductDTO response =  productService.updateProduct(productId,productDTO);
+        return new ResponseEntity(response,HttpStatus.OK);
 
     }
 
