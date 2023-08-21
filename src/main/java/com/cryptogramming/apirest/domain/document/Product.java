@@ -1,4 +1,4 @@
-package com.cryptogramming.apirest.domain;
+package com.cryptogramming.apirest.domain.document;
 
 
 import com.mongodb.lang.NonNull;
@@ -24,8 +24,7 @@ public class Product implements Serializable {
 
     private Date releaseDate;
 
-
-
+    private String bucket;
 
 
 
@@ -86,4 +85,11 @@ public class Product implements Serializable {
         this.releaseDate = releaseDate;
     }
 
+    public String getBucket() {
+        return bucket;
+    }
+
+    public void setBucket(String bucket) {
+        this.bucket = bucket;
+    }
 }

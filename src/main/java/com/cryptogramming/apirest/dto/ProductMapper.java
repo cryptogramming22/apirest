@@ -1,6 +1,6 @@
 package com.cryptogramming.apirest.dto;
 
-import com.cryptogramming.apirest.domain.Product;
+import com.cryptogramming.apirest.domain.document.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -10,10 +10,10 @@ public interface ProductMapper {
 
     ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
 
-    @Mapping(source = "imagePath" , target = "imageUrl")
+    @Mapping(source = "imagePath" , target = "file")
     ProductDTO productToProductDto(Product product);
 
-    @Mapping(source = "imageUrl" , target = "imagePath")
+    @Mapping(source = "file" , target = "imagePath")
     Product productDtoToProduct(ProductDTO productDTO);
 
 }

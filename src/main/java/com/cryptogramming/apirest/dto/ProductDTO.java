@@ -1,10 +1,12 @@
 package com.cryptogramming.apirest.dto;
 
 public class ProductDTO {
+
     private int id;
-    private String imageUrl;
+    private String file;
     private String title;
     private String description;
+    private String bucket;
 
     public String getTitle() {
         return title;
@@ -22,12 +24,12 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getFile() {
+        return file;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getDescription() {
@@ -38,4 +40,11 @@ public class ProductDTO {
         this.description = description;
     }
 
+    public String getBucket() {
+        return bucket;
+    }
+
+    public void setBucket(String bucket) {
+        this.bucket = bucket;
+    }
 }

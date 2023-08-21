@@ -1,21 +1,29 @@
 package com.cryptogramming.apirest.service;
 
+import com.cryptogramming.apirest.domain.BucketObject;
+import com.cryptogramming.apirest.domain.IBucket;
+import com.cryptogramming.apirest.domain.IProduct;
 import com.cryptogramming.apirest.dto.ProductDTO;
 import com.cryptogramming.apirest.dto.ProductMapper;
 import com.cryptogramming.apirest.repository.ProductRepository;
-import com.cryptogramming.apirest.domain.Product;
+import com.cryptogramming.apirest.domain.document.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public  class ProductService  {
+public  class ProductService  implements IProduct{
 
     @Autowired
     ProductRepository repository;
+
+    @Autowired
+    IBucket bucketDataSource;
 
     public List<ProductDTO> getAllProducts() {
 
@@ -26,6 +34,7 @@ public  class ProductService  {
 
         return productDTOS;
     }
+
 
 
     public void createProduct(ProductDTO productDTO) {
@@ -61,10 +70,23 @@ public  class ProductService  {
         }
     }
 
+    public ProductDTO addImageToProduct(int productId, MultipartFile file) throws IOException {
 
+        Product product = repository.findById(productId).orElse(null);
 
+        if (product==null){
+            return null;
+        }
 
+        BucketObject bucketObject =  bucketDataSource.uploadFile(file);
 
+        product.setImagePath(bucketObject.getFileName());
+        product.setBucket(bucketObject.getBucket());
 
+        repository.save(product);
+        ProductDTO response =   ProductMapper.mapper.productToProductDto(product);
+
+        return  response;
+    }
 
 }

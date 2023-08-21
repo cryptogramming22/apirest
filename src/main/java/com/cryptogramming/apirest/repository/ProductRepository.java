@@ -1,7 +1,7 @@
 package com.cryptogramming.apirest.repository;
 
 
-import com.cryptogramming.apirest.domain.Product;
+import com.cryptogramming.apirest.domain.document.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
