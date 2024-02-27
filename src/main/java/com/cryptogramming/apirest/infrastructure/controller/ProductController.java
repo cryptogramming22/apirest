@@ -1,4 +1,4 @@
-package com.cryptogramming.apirest.controller;
+package com.cryptogramming.apirest.infrastructure.controller;
 
 
 import com.cryptogramming.apirest.domain.IProduct;

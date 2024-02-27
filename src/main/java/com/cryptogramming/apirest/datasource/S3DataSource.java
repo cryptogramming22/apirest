@@ -2,7 +2,7 @@ package com.cryptogramming.apirest.datasource;
 
 import com.cryptogramming.apirest.domain.BucketObject;
 import com.cryptogramming.apirest.domain.IBucket;
-import com.cryptogramming.apirest.remote.S3Client;
+import com.cryptogramming.apirest.infrastructure.remote.S3Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

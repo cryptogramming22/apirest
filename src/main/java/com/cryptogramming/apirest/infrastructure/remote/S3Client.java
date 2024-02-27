@@ -1,4 +1,4 @@
-package com.cryptogramming.apirest.remote;
+package com.cryptogramming.apirest.infrastructure.remote;
 
 
 import com.amazonaws.auth.AWSCredentials;
